@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deqsoft.jinxiaocun.dao.UserDao">
+
+	<resultMap type="User" id="userResultMap">
+		<id property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="userSex" column="user_sex" />
+		<result property="userAccount" column="user_account" />
+		<result property="userTel" column="user_tel" />
+		<result property="userPlace" column="user_place" />
+		<result property="userEmail" column="user_email" />
+		<result property="userText" column="user_text" />
+		<result property="userPassword" column="user_password" />
+	</resultMap>
+
+	<update id="updateUser" parameterType="User">
+		update t_user
+		set
+		user_name=#{userName},
+		user_sex=#{userSex},
+		user_account=#{userAccount},
+		user_tel=#{userTel},
+		user_place=#{userPlace},
+		user_email=#{userEmail},
+		user_text=#{userText},
+		user_password=#{userPassword}
+		where
+		user_id=#{userId}
+	</update>
+
+	<select id="queryById" resultType="User" parameterType="int">
+		SELECT
+		user_id,user_name,user_sex,user_account,user_tel,user_place,user_email,
+		user_text,user_password
+		FROM t_user
+		WHERE user_id=#{userId}
+	</select>
+
+	<select id="queryByUserAccount" resultType="User"
+		parameterType="String">
+		SELECT
+		user_id,user_name,user_sex,user_account,user_tel,user_place,user_email,
+		user_text,user_password
+		FROM t_user
+		WHERE user_account=#{userAccount}
+	</select>
+
+	<select id="queryAllUser" resultMap="userResultMap">
+		SELECT
+		user_id,user_name,user_sex,user_account,user_tel,user_place,user_email,
+		user_text,user_password
+		FROM user
+	</select>
+
+</mapper>
+<!-- 行5可能需要修改 -->

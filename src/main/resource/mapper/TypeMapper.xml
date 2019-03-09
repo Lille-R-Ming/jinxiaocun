@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deqsoft.jinxiaocun.dao.TypeDao">
+
+	<resultMap type="ProductType" id="typeResultMap">
+		<id property="typeId" column="type_id" />
+		<result property="typeName" column="type_name" />
+		<result property="typeDescribe" column="type_describe" />
+		<result property="typeText" column="type_text" />
+	</resultMap>
+
+	<select id="queryAllType" resultMap="typeResultMap">
+		SELECT
+		type_id,type_name,type_describe,type_text
+		FROM t_product_type
+	</select>
+
+	<insert id="addNewType" parameterType="ProductType">
+		INSERT
+		into
+		t_product_type
+		(type_name,type_describe,type_text)
+		values
+		(#{typeName},#{typeDescribe},#{typeText})
+
+	</insert>
+	
+	<delete id="deleteType" parameterType="Integer">
+	delete 
+	from
+	t_product_type
+	where
+	type_id=#{typeId}
+	</delete>
+
+</mapper>
+<!-- 行5可能需要修改 -->
